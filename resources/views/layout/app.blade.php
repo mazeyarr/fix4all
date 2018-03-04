@@ -25,6 +25,14 @@
 
 @include('partials._scripts')
 
+<script>
+    if ($(window).width() < 960) {
+        $('#responsieve-logo').show();
+    }
+    else {
+        $('#responsieve-logo').hide();
+    }
+</script>
 </body>
 <!-- END BODY -->
 </html>
