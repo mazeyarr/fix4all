@@ -16,4 +16,10 @@ class HomeController extends Controller
     {
         return view('landing')->withProjects(RecentProject::all());
     }
+
+    public function showOpdracht($id)
+    {
+        $project = RecentProject::findOrFail($id);
+        return view('opdracht-bekijken')->withProject($project);
+    }
 }
