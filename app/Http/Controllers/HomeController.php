@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RecentProject;
 use App\Texts;
 use Illuminate\Http\Request;
+use Spatie\Sitemap\SitemapGenerator;
 
 class HomeController extends Controller
 {
@@ -22,5 +23,10 @@ class HomeController extends Controller
     {
         $project = RecentProject::findOrFail($id);
         return view('opdracht-bekijken')->withProject($project);
+    }
+
+    public function generateSitemap()
+    {
+        SitemapGenerator::create(env('APP_URL'))->writeToFile(public_path());
     }
 }
