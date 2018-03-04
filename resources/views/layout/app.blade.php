@@ -22,7 +22,12 @@
 <!--========== PAGE LAYOUT ==========-->
 @yield('content')
 <!--========== END PAGE LAYOUT ==========-->
-
+<div style="position: relative;right: 0;bottom: 0;left: 0;padding: 1rem;text-align: center;background: #fafafa">
+    <div>
+        <p style="color: #c4c4c4; font-size: 12px; margin-bottom: 0;">Created and Designed by</p>
+        <a href="http://mazeyar.nl"><img src="http://mazeyar.nl/images/logo.png" alt="Mazeyar Rezaei Ghavamabadi"></a>
+    </div>
+</div>
 @include('partials._scripts')
 
 @if (!App::isLocal())

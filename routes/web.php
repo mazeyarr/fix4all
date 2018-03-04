@@ -31,3 +31,5 @@ Route::post('/backend/opdrachten/new/save', 'BackendController@OpdrachtenCreateS
 Route::post('/backend/opdrachten/save/{id}', 'BackendController@OpdrachtenSave')->name('user_opdrachten_save');
 Route::post('/backend/opdrachten/upload/{id}', 'BackendController@OpdrachtenUpload')->name('user_opdrachten_upload');
 Route::get('/backend/opdrachten/delete/{id}', 'BackendController@OpdrachtenDelete')->name('user_opdrachten_delete');
+
+Route::get('/backend/log/', 'BackendController@getLog')->name('user_get_log');

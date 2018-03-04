@@ -45,6 +45,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li style="margin-top: 20px;"><a href="{{ route('login') }}">Login</a></li>
+                            <li style="margin-top: 20px;"><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown" style="margin-top: 20px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -72,11 +73,11 @@
         </nav>
 
         <div class="container">
+            @auth
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">Wat wilt u bewerken?</div>
-
                         <div class="panel-body">
                             <ul>
                                 <li><a href="{{ route('user_home') }}">Intro</a></li>
@@ -88,8 +89,16 @@
                     </div>
                 </div>
             </div>
+            @endauth
+
         </div>
         @yield('content')
+    </div>
+    <div style="position: relative;right: 0;bottom: 0;left: 0;padding: 1rem;text-align: center;">
+        <div>
+            <p style="color: #c4c4c4; font-size: 12px; margin-bottom: 0;">Created and Designed by</p>
+            <a href="http://mazeyar.nl"><img src="http://mazeyar.nl/images/logo.png" alt="Mazeyar Rezaei Ghavamabadi"></a>
+        </div>
     </div>
 
     <!-- Scripts -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Log;
 use App\RecentProject;
 use App\Texts;
 use Illuminate\Http\Request;
@@ -9,6 +10,10 @@ use Image;
 use File;
 class BackendController extends Controller
 {
+    protected $thumbnailHeight = 360;
+    protected $thumbnailWidth = 240;
+    protected $imageHeight = 200;
+    protected $imageWidth = 200;
     /**
      * Create a new controller instance.
      *
@@ -32,6 +37,23 @@ class BackendController extends Controller
 
         $text = Texts::find(1);
         $text->intro  = $request->intro;
+
+        if ($text->isDirty()) {
+            foreach ($text->getDirty() as $field => $newData) {
+                $oldData = $text->getOriginal($field);
+                if ($oldData != $newData)
+                {
+                    Log::create([
+                        'page' => \Route::getCurrentRoute()->getName(),
+                        'old' => $oldData,
+                        'new' => $newData,
+                        'discription' => "Project has been changed: " . $oldData . " --> " . $newData,
+                        'user_id' => \Auth::user()->id,
+                    ]);
+                }
+            }
+        }
+
         $text->save();
 
         return redirect()->back()->withSuccess("Opgeslagen");
@@ -45,6 +67,23 @@ class BackendController extends Controller
 
         $text = Texts::find(1);
         $text->about  = $request->about;
+
+        if ($text->isDirty()) {
+            foreach ($text->getDirty() as $field => $newData) {
+                $oldData = $text->getOriginal($field);
+                if ($oldData != $newData)
+                {
+                    Log::create([
+                        'page' => \Route::getCurrentRoute()->getName(),
+                        'old' => $oldData,
+                        'new' => $newData,
+                        'discription' => "Project has been changed: " . $oldData . " --> " . $newData,
+                        'user_id' => \Auth::user()->id,
+                    ]);
+                }
+            }
+        }
+
         $text->save();
 
         return redirect()->back()->withSuccess("Opgeslagen");
@@ -84,14 +123,27 @@ class BackendController extends Controller
         $thumnail = $request->file('thumbnail');
         $thumbnail_filename = time() . '.' . $thumnail->getClientOriginalExtension();
 
-        Image::make($thumnail)->resize(360, 240)->save(public_path('uploads/thumbnails/' . $thumbnail_filename));
+        $image = Image::make($thumnail)->resize($this->thumbnailHeight, $this->thumbnailWidth, function ($constraint){
+            $constraint->aspectRatio();
+        });
+
+        $canvas = Image::canvas($this->thumbnailHeight ,$this->thumbnailWidth);
+        $canvas->insert($image, 'center');
+        $canvas->save(public_path('uploads/thumbnails/' . $thumbnail_filename));
+
         $project->thumbnail = $thumbnail_filename;
 
         if ($request->hasFile('img_before')){
             $img_before = $request->file('img_before');
             $img_before_filename = time() . '.' . $img_before->getClientOriginalExtension();
 
-            Image::make($img_before)->resize(200, 200)->save(public_path('uploads/before/' . $img_before_filename));
+            $image = Image::make($img_before)->resize($this->imageHeight, $this->imageWidth, function ($constraint){
+                $constraint->aspectRatio();
+            });
+            $canvas = Image::canvas($this->imageHeight, $this->imageWidth);
+            $canvas->insert($image, 'center');
+            $canvas->save(public_path('uploads/before/' . $img_before_filename));
+
             $project->img_before = $img_before_filename;
         }
 
@@ -99,9 +151,23 @@ class BackendController extends Controller
             $img_after = $request->file('img_after');
             $img_after_filename = time() . '.' . $img_after->getClientOriginalExtension();
 
-            Image::make($img_after)->resize(200, 200)->save(public_path('uploads/after/' . $img_before_filename));
+            $image = Image::make($img_after)->resize($this->imageHeight, $this->imageWidth, function ($constraint){
+                $constraint->aspectRatio();
+            });
+            $canvas = Image::canvas($this->imageHeight , $this->imageWidth);
+            $canvas->insert($image, 'center');
+            $canvas->save(public_path('uploads/after/' . $img_before_filename));
+
             $project->img_after = $img_after_filename;
         }
+
+        Log::create([
+            'page' => \Route::getCurrentRoute()->getName(),
+            'old' => "-",
+            'new' => $project->title . " | ID: " . $project->id,
+            'discription' => "New project added to website",
+            'user_id' => \Auth::user()->id,
+        ]);
 
         $project->save();
 
@@ -120,6 +186,23 @@ class BackendController extends Controller
         $project->title = $request->title;
         $project->discription = $request->discription;
         $project->discription_long = $request->discription_long;
+
+        if ($project->isDirty()) {
+            foreach ($project->getDirty() as $field => $newData) {
+                $oldData = $project->getOriginal($field);
+                if ($oldData != $newData)
+                {
+                    Log::create([
+                        'page' => \Route::getCurrentRoute()->getName(),
+                        'old' => $oldData,
+                        'new' => $newData,
+                        'discription' => "Project has been changed: " . $oldData . " --> " . $newData,
+                        'user_id' => \Auth::user()->id,
+                    ]);
+                }
+            }
+        }
+
         $project->save();
 
         return redirect()->back()->withSuccess($project->title . " Opgeslagen!");
@@ -140,7 +223,13 @@ class BackendController extends Controller
         $thumnail = $request->file('thumbnail');
         $thumbnail_filename = time() . '.' . $thumnail->getClientOriginalExtension();
 
-        Image::make($thumnail)->resize(360, 240)->save(public_path('uploads/thumbnails/' . $thumbnail_filename));
+        $image = Image::make($thumnail)->resize($this->thumbnailHeight, $this->thumbnailWidth, function ($constraint){
+            $constraint->aspectRatio();
+        });
+        $canvas = Image::canvas($this->thumbnailHeight ,$this->thumbnailWidth);
+        $canvas->insert($image, 'center');
+        $canvas->save(public_path('uploads/thumbnails/' . $thumbnail_filename));
+
         $project->thumbnail = $thumbnail_filename;
 
         if ($request->hasFile('img_before')){
@@ -149,7 +238,13 @@ class BackendController extends Controller
             $img_before = $request->file('img_before');
             $img_before_filename = time() . '.' . $img_before->getClientOriginalExtension();
 
-            Image::make($img_before)->resize(200, 200)->save(public_path('uploads/before/' . $img_before_filename));
+            $image = Image::make($img_before)->resize($this->imageHeight, $this->imageWidth, function ($constraint){
+                $constraint->aspectRatio();
+            });
+            $canvas = Image::canvas($this->imageHeight, $this->imageWidth);
+            $canvas->insert($image, 'center');
+            $canvas->save(public_path('uploads/before/' . $img_before_filename));
+
             $project->img_before = $img_before_filename;
         }
 
@@ -159,8 +254,30 @@ class BackendController extends Controller
             $img_after = $request->file('img_after');
             $img_after_filename = time() . '.' . $img_after->getClientOriginalExtension();
 
-            Image::make($img_after)->resize(200, 200)->save(public_path('uploads/after/' . $img_before_filename));
+            $image = Image::make($img_after)->resize($this->imageHeight, $this->imageWidth, function ($constraint){
+                $constraint->aspectRatio();
+            });
+            $canvas = Image::canvas($this->imageHeight ,$this->imageWidth);
+            $canvas->insert($image, 'center');
+            $canvas->save(public_path('uploads/after/' . $img_before_filename));
+
             $project->img_after = $img_after_filename;
+        }
+
+        if ($project->isDirty()) {
+            foreach ($project->getDirty() as $field => $newData) {
+                $oldData = $project->getOriginal($field);
+                if ($oldData != $newData)
+                {
+                    Log::create([
+                        'page' => \Route::getCurrentRoute()->getName(),
+                        'old' => $oldData,
+                        'new' => $newData,
+                        'discription' => "Project has been changed: " . $oldData . " --> " . $newData,
+                        'user_id' => \Auth::user()->id,
+                    ]);
+                }
+            }
         }
 
         $project->save();
@@ -180,11 +297,26 @@ class BackendController extends Controller
             if (!empty($project->img_after)) {
                 File::delete('uploads/after/' . $project->img_after);
             }
+
             $project->delete();
+
+            Log::create([
+                'page' => \Route::getCurrentRoute()->getName(),
+                'old' => "Exists",
+                'new' => "Deleted",
+                'discription' => "Project has been deleted",
+                'user_id' => \Auth::user()->id,
+            ]);
+
         } catch (\Exception $e) {
             return redirect()->back()->withErrors( $e->getMessage());
         }
 
         return redirect()->back()->withSuccess($project->title . "Verwijderd");
+    }
+
+    public function getLog()
+    {
+        return Log::all()->toJson();
     }
 }
