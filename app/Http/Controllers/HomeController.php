@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecentProject;
+use App\Texts;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('landing')->withProjects(RecentProject::all());
+        return view('landing')->withIntro(Texts::find(1)->intro)->withAbout(Texts::find(1)->about)->withProjects(RecentProject::all());
     }
 
     public function showOpdracht($id)

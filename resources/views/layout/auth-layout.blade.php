@@ -79,9 +79,9 @@
 
                         <div class="panel-body">
                             <ul>
-                                <li><a href="">Intro</a></li>
+                                <li><a href="{{ route('user_home') }}">Intro</a></li>
                                 <li><a href="{{ route('user_opdrachten') }}">Recente Opdrachten</a></li>
-                                <li><a href="">Over Fix4all</a></li>
+                                <li><a href="{{ route('user_about') }}">Over Fix4all</a></li>
                                 <li><a href="">Contact</a></li>
                             </ul>
                         </div>
@@ -97,6 +97,18 @@
     <!-- Include JS file. -->
     <script type='text/javascript' src='{{ asset('js/summernote.min.js') }}'></script>
     <script src="{{ asset('js/summernote-nl-NL.min.js') }}"></script>
+    @if (!App::isLocal())
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96990724-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-96990724-3');
+        </script>
+
+    @endif
 
     @yield('script')
 </body>

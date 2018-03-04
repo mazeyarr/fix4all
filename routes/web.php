@@ -19,6 +19,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/backend', 'BackendController@index')->name('user_home');
+Route::post('/backend/intro/save', 'BackendController@saveIntro')->name('user_intro_save');
+
+Route::get('/backend/about', 'BackendController@showAbout')->name('user_about');
+Route::post('/backend/about/save', 'BackendController@saveAbout')->name('user_about_save');
+
 Route::get('/backend/opdrachten', 'BackendController@showOpdrachten')->name('user_opdrachten');
 Route::get('/backend/opdrachten/new', 'BackendController@OpdrachtenCreate')->name('user_opdrachten_create');
 

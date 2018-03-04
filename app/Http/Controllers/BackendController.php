@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecentProject;
+use App\Texts;
 use Illuminate\Http\Request;
 use Image;
 use File;
@@ -20,7 +21,38 @@ class BackendController extends Controller
 
     public function index()
     {
-        return view('auth.backend-opdrachten');
+        return view('auth.backend-intro')->withIntro(Texts::find(1)->intro);
+    }
+
+    public function saveIntro(Request $request)
+    {
+        $request->validate([
+            'intro' => 'required|max:255',
+        ]);
+
+        $text = Texts::find(1);
+        $text->intro  = $request->intro;
+        $text->save();
+
+        return redirect()->back()->withSuccess("Opgeslagen");
+    }
+
+    public function saveAbout(Request $request)
+    {
+        $request->validate([
+            'about' => 'required|max:255',
+        ]);
+
+        $text = Texts::find(1);
+        $text->about  = $request->about;
+        $text->save();
+
+        return redirect()->back()->withSuccess("Opgeslagen");
+    }
+
+    public function showAbout()
+    {
+        return view('auth.backend-about')->withAbout(Texts::find(1)->about);
     }
 
     public function showOpdrachten()
