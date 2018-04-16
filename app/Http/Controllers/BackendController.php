@@ -32,7 +32,7 @@ class BackendController extends Controller
     public function saveIntro(Request $request)
     {
         $request->validate([
-            'intro' => 'required|max:255',
+            'intro' => 'required',
         ]);
 
         $text = Texts::find(1);
@@ -62,7 +62,7 @@ class BackendController extends Controller
     public function saveAbout(Request $request)
     {
         $request->validate([
-            'about' => 'required|max:255',
+            'about' => 'required',
         ]);
 
         $text = Texts::find(1);
