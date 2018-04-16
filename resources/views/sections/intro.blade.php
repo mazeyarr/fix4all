@@ -10,9 +10,7 @@
                     </p>
                 </div>
                 <ul class="list-inline">
-                    <li><a href="http://twitter.com/malkani_faiz" class="social-icons"><i class="icon-social-twitter"></i></a></li>
-                    <li><a href="http://dribbble.com/faizmalkani" class="social-icons"><i class="icon-social-dribbble"></i></a></li>
-                    <li><a href="https://in.linkedin.com/in/faizmalkani" class="social-icons"><i class="icon-social-linkedin"></i></a></li>
+                    <li><a href="https://nl.linkedin.com/in/behnam-rezaei-46a2a85a" class="social-icons"><i class="icon-social-linkedin"></i></a></li>
                 </ul>
             </div>
         </div>
