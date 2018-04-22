@@ -44,7 +44,7 @@
 @endif
 
 <script>
-    if ($(window).width() < 1000) {
+    if ($(window).width() < 960) {
         $('#responsieve-logo').show();
         $('#original-logo').hide();
     }
