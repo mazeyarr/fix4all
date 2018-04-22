@@ -9,7 +9,7 @@
                             <h2 style="color: #ffffff">Over Fix4all</h2>
                         </div>
                         <p class="promo-block-text" style="color: #ffffff;">
-                            {{ $about }}
+                            {!! $about !!}
                         </p>
                     </div>
                 </div>

@@ -2,9 +2,9 @@
 <title>@yield('title')</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="keywords" content="Eindhoven, Klusbedrijf, Loodgieter, Elektra, Renovatie, Snel, Snelle Service, Timmerman, Laminaat, Handyman, Nuenen"/>
-<meta name="subject" content="Klusbedrijf">
-<meta name="description" content="{{ $intro }}">
+<meta name="keywords" content="{{ \App\MetaData::find(1)->keywords }}"/>
+<meta name="subject" content="{{ \App\MetaData::find(1)->subject }}">
+<meta name="description" content="{{ \App\MetaData::find(1)->description }}">
 <meta name="author" content="Mazeyar Rezaei Ghavamabadi, info.mazeyar@gmail.com">
 <meta name="designer" content="Mazeyar Rezaei, http://mazeyar.nl">
 <meta name="url" content="http://fix4all.nl">

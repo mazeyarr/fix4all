@@ -23,31 +23,21 @@
     @endif
     <div class="row">
         <div class="col-md-10 col-md-push-1">
-            {{ Form::open(['route' => 'user_about_save', 'id' => 'form']) }}
+            {{ Form::open(['route' => 'user_meta_save', 'id' => 'form']) }}
+            <h3>Keywords</h3>
             <div class="form-group">
-                {!! Form::textarea('about', $about, ['id' => 'about', 'class' => 'form-control', 'placeholder' => 'Vertel wat over Fix4all', 'style' => 'display:none;']) !!}
-                <div id="editor"></div>
+                {!! Form::text('keywords', $meta->keywords, ['id' => 'keywords', 'class' => 'form-control', 'placeholder' => 'Woorden waar deze site door gevonden kan worden...']) !!}
             </div>
-            <button id="btnSaveAbout" class="btn btn-success btn-block">Opslaan</button>
+            <h3>Onderwerp</h3>
+            <div class="form-group">
+                {!! Form::text('subject', $meta->subject, ['id' => 'subject', 'class' => 'form-control', 'placeholder' => 'Onderwerp van de site']) !!}
+            </div>
+            <h3>Omscrhijving</h3>
+            <div class="form-group">
+                {!! Form::textarea('description', $meta->description, ['id' => 'discription', 'class' => 'form-control', 'placeholder' => 'Omschrijving van de site in 255 woorden']) !!}
+            </div>
+            <button class="btn btn-success btn-block" data-form="form-upload">Opslaan</button>
             {{ Form::close() }}
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function () {
-
-            $('#editor').summernote('code',  $('#about').val());
-
-            $('#btnSaveAbout').click(function (e) {
-                e.preventDefault();
-                var form = $('#form');
-
-                $('#about').val($('#editor').summernote('code'));
-
-                form.submit();
-            });
-        })
-    </script>
 @endsection

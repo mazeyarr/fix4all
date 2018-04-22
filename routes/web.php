@@ -18,6 +18,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::get('/backend/meta', 'BackendController@showMeta')->name('user_meta');
+Route::get('/backend/meta/save', 'BackendController@saveMeta')->name('user_meta_save');
+
 Route::get('/backend', 'BackendController@index')->name('user_home');
 Route::post('/backend/intro/save', 'BackendController@saveIntro')->name('user_intro_save');
 

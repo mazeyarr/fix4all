@@ -80,6 +80,7 @@
                         <div class="panel-heading">Wat wilt u bewerken?</div>
                         <div class="panel-body">
                             <ul>
+                                <li><a href="{{ route('user_meta') }}">Meta Data</a></li>
                                 <li><a href="{{ route('user_home') }}">Intro</a></li>
                                 <li><a href="{{ route('user_opdrachten') }}">Recente Opdrachten</a></li>
                                 <li><a href="{{ route('user_about') }}">Over Fix4all</a></li>

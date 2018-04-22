@@ -44,11 +44,14 @@
 @endif
 
 <script>
-    if ($(window).width() < 960) {
+    if ($(window).width() < 1000) {
+        alert(1);
         $('#responsieve-logo').show();
+        $('#original-logo').hide();
     }
     else {
         $('#responsieve-logo').hide();
+        $('#original-logo').show();
     }
 </script>
 </body>

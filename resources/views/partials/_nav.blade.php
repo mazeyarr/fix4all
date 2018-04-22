@@ -12,7 +12,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse nav-collapse">
             <div class="menu-container">
-                <a href="{{ route('home') }}"><img src="{{ asset('img/LogoBlack@0,5x.png') }}" alt="Fix4all logo" style="margin-top: 10px;"></a>
+                <a id="original-logo" href="{{ route('home') }}"><img src="{{ asset('img/LogoBlack@0,5x.png') }}" alt="Fix4all logo" style="margin-top: 10px;"></a>
                 <ul class="nav navbar-nav navbar-nav-right">
                     <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#body">Home</a></li>
                     <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#work">Recente Opdrachten</a></li>

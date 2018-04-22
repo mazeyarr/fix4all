@@ -2,11 +2,10 @@
 <div class="promo-block" style="padding-top: 200px;">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 sm-margin-b-60" style="padding-left: 0; height: 400px;">
+            <div class="col-sm-12 sm-margin-b-60" style="padding-left: 0; min-height: 400px;">
                 <div class="margin-b-30">
-                    <h1></h1>
                     <p class="promo-block-text" style="color: #ffffff;">
-                        {{ $intro }}
+                        {!! $intro !!}
                     </p>
                 </div>
                 <ul class="list-inline">

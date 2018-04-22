@@ -9,6 +9,7 @@
 
 <!-- THEME STYLES -->
 <link href="{{ asset('css/layout.min.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css"/>
 
 <!-- Favicon -->
 <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('icons/apple-touch-icon.png') }}">

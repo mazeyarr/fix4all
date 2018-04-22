@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Log;
+use App\MetaData;
 use App\RecentProject;
 use App\Texts;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class BackendController extends Controller
         ]);
 
         $text = Texts::find(1);
-        $text->intro  = $request->intro;
+        $text->intro  = str_replace('<p>', '<p class="promo-text">', $request->intro);
 
         if ($text->isDirty()) {
             foreach ($text->getDirty() as $field => $newData) {
@@ -66,7 +67,7 @@ class BackendController extends Controller
         ]);
 
         $text = Texts::find(1);
-        $text->about  = $request->about;
+        $text->about  = str_replace('<p>', '<p class="promo-text">', $request->about);
 
         if ($text->isDirty()) {
             foreach ($text->getDirty() as $field => $newData) {
@@ -92,6 +93,45 @@ class BackendController extends Controller
     public function showAbout()
     {
         return view('auth.backend-about')->withAbout(Texts::find(1)->about);
+    }
+
+    public function showMeta()
+    {
+        return view('auth.backend-meta')->withMeta(MetaData::find(1));
+    }
+
+    public function saveMeta(Request $request)
+    {
+        $request->validate([
+            'keywords' => 'required',
+            'subject' => 'required',
+            'description' => 'required',
+        ]);
+
+        $meta = Texts::find(1);
+        $meta->keywords = $request->keywords;
+        $meta->subject = $request->subject;
+        $meta->description = $request->description;
+
+        if ($meta->isDirty()) {
+            foreach ($meta->getDirty() as $field => $newData) {
+                $oldData = $meta->getOriginal($field);
+                if ($oldData != $newData)
+                {
+                    Log::create([
+                        'page' => \Route::getCurrentRoute()->getName(),
+                        'old' => $oldData,
+                        'new' => $newData,
+                        'discription' => "Project has been changed: " . $oldData . " --> " . $newData,
+                        'user_id' => \Auth::user()->id,
+                    ]);
+                }
+            }
+        }
+
+        $meta->save();
+
+        return redirect()->back()->withSuccess("Opgeslagen");
     }
 
     public function showOpdrachten()
