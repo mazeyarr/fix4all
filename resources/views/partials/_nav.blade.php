@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="menu-container js_nav-item">
-            <a id="responsieve-logo" href="{{ route('home') }}" style="display: none; position: absolute;"><img src="{{ asset('img/Logo4@0,5x.png') }}" alt="Fix4all logo" style="margin-top: 10px;"></a>
+            <a id="responsieve-logo" href="{{ route('home') }}" style="display: none; position: absolute;"><img src="{{ asset('img/LogoBlack@0,5x.png') }}" alt="Fix4all logo" style="margin-top: 10px;"></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="toggle-icon"></span>
