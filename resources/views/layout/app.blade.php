@@ -45,7 +45,6 @@
 
 <script>
     if ($(window).width() < 1000) {
-        alert(1);
         $('#responsieve-logo').show();
         $('#original-logo').hide();
     }
