@@ -17,7 +17,7 @@
                     </div>
                     <h4><a href="#">{{ $project->title }}</a> <span class="text-uppercase margin-l-20"></span></h4>
                     <p>{{ $project->discription }}</p>
-                    <a class="link" href="#">Lees meer</a>
+                    {{--<a class="link" href="#">Lees meer</a>--}}
                 </div>
             @endforeach
         </div>
